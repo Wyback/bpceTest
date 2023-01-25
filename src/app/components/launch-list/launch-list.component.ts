@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { PropertiesService } from 'src/app/services/properties.service';
-import { LaunchListState } from 'src/app/state/reducer';
-import * as fromActions from '../../state/actions'
+import { LaunchListState } from 'src/app/store/app.interface';
+import * as fromActions from '../../store/selectors/reducers/actions'
 
 @Component({
   selector: 'app-launch-list',

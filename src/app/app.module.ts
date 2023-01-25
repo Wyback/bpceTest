@@ -9,7 +9,8 @@ import { LaunchListComponent } from './components/launch-list/launch-list.compon
 import { HeaderComponent } from './components/header/header.component';
 import { LaunchDetailComponent } from './components/launch-detail/launch-detail.component';
 import { StoreModule } from '@ngrx/store';
-import { metaReducers, rootReducer } from './state/reducer';
+import { metaReducers, rootReducer } from './store/selectors/reducers/reducer';
+import { reducers } from './store';
 
 
 @NgModule({
@@ -24,11 +25,7 @@ import { metaReducers, rootReducer } from './state/reducer';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    StoreModule.forRoot({
-      root: rootReducer
-    }, {
-      metaReducers: metaReducers
-    })
+    StoreModule.forRoot(reducers, { metaReducers }),
   ],
   providers: [],
   bootstrap: [AppComponent]
