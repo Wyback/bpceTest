@@ -1,0 +1,7 @@
+<!--<div class="launch-card link" routerLink="launchdetailed" [queryParams]="launch">-->
+<div class="launch-card link">
+    <h2>{{ launch.name }}</h2>
+    <p>status : {{ launch.status.name }}</p>
+    <p>window start : {{ launch.window_start | date }}</p>
+    <p>window end : {{ launch.window_end | date }}</p>
+</div>
