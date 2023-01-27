@@ -4,5 +4,5 @@ import { LaunchListState } from "../app.interface";
 
 export const launchSelector = createSelector(
     (state: LaunchListState) => state.launchs,
-    (launchs: ReadonlyArray<Launch>) => launchs
+    (launchs: Array<Launch>) => launchs
 )

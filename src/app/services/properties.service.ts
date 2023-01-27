@@ -12,7 +12,7 @@ export class PropertiesService {
 
   launchsList: Launch[] = []
 
-  constructor(readonly http: HttpClient) { }
+  constructor(private readonly http: HttpClient) { }
 
   getAllLaunch(): Observable<any>{
     return this.http.get(API_URL + 'launch/upcoming?offest=0&limit=50')

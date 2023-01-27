@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
+import { combineLatest, map, Subject, takeUntil } from 'rxjs';
 import { Pad } from 'src/app/models/pad.model';
 import { Program } from 'src/app/models/program.model';
 import { Rocket } from 'src/app/models/rocket.model';
@@ -22,15 +23,17 @@ export class LaunchDetailComponent implements OnInit {
   program!: Program
   name!: string
 
-  constructor(readonly route: ActivatedRoute, readonly store: Store<LaunchListState>, readonly router: Router) {
+  private destroy$ = new Subject()
+
+  constructor(private readonly route: ActivatedRoute, private readonly store: Store<LaunchListState>, private readonly router: Router) {
   }
 
   ngOnInit() {
-    this.route.queryParams.pipe().subscribe(params => {
-        this.launchId = params['id']
-      }
-    )
-    this.launch$.pipe()
+
+    this.route.queryParams.pipe(takeUntil(this.destroy$)).subscribe(params => {
+      this.launchId = params['id']
+    })
+    this.launch$.pipe(takeUntil(this.destroy$))
             .subscribe((launchs) => {
               this.launchs = launchs
               if(this.launchs.launchs == null){
@@ -46,4 +49,5 @@ export class LaunchDetailComponent implements OnInit {
         this.program = this.launchs[0].program
         this.name = this.launchs[0].name
   }
+
 }
