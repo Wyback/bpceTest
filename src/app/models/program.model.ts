@@ -1,3 +1,5 @@
+import { Agency } from "./agency.model";
+
 export class Program {
-    agencies!: any
+    agencies!: Agency[]
 }

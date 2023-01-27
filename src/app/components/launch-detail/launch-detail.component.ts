@@ -28,7 +28,9 @@ export class LaunchDetailComponent implements OnInit {
   ngOnInit() {
     this.route.queryParams.pipe().subscribe(params => {
         this.launchId = params['id']
-        this.launch$.pipe()
+      }
+    )
+    this.launch$.pipe()
             .subscribe((launchs) => {
               this.launchs = launchs
               if(this.launchs.launchs == null){
@@ -43,7 +45,5 @@ export class LaunchDetailComponent implements OnInit {
         this.rocket = this.launchs[0].rocket
         this.program = this.launchs[0].program
         this.name = this.launchs[0].name
-      }
-    )
   }
 }

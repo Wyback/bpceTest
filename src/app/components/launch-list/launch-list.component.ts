@@ -13,14 +13,11 @@ import * as fromActions from '../../store/actions/actions-launchs'
 export class LaunchListComponent implements OnInit {
 
   myLaunchList!: Launch[]
-  // readonly myLaunchList$ = this.store.select('launchs').pipe(map((launchs) => launchs))
   constructor(readonly propertiesService: PropertiesService, readonly store: Store<LaunchListState>) {}
 
   ngOnInit() {
     this.propertiesService.getAllLaunch().subscribe(res => {
       this.myLaunchList = res.results
-      // sort launch list to most recent window_start
-      this.myLaunchList = this.myLaunchList.sort((a,b)=> Date.parse(b.window_start) - Date.parse(a.window_start));
       this.store.dispatch(fromActions.loadLaunchListSuccess({ launchs: res.results }))
     })
   }
