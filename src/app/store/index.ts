@@ -1,9 +1,10 @@
 
 import { ActionReducerMap, MetaReducer } from '@ngrx/store';
 import { LaunchListState } from './app.interface';
-import { AppReducer, reducer } from './selectors/reducers/reducer';
+import { AppReducer, reducerLaunch } from './reducers/reducer-launchs';
 
 export const reducers: ActionReducerMap<LaunchListState> = {
-    launchs: reducer
+    launchs: AppReducer
   };
+
   export const metaReducers: MetaReducer<LaunchListState>[] = [];

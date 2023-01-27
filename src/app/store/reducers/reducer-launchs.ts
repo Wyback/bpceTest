@@ -1,10 +1,10 @@
 import { Action, createReducer, MetaReducer, on } from "@ngrx/store";
-import { initialState, LaunchListState } from "../../app.interface";
-import { loadLaunchListFailure, loadLaunchListSuccess } from "./actions";
+import { loadLaunchListSuccess } from "../actions/actions-launchs";
+import { initialState } from "../app.interface";
 
 export const userFeatureKey = 'AppState';
 
-export const reducer = createReducer(
+export const reducerLaunch = createReducer(
     initialState,
     on(loadLaunchListSuccess, (state, action) => {
         return {
@@ -17,6 +17,6 @@ export const metaReducers: MetaReducer[] = []
 
 export const rootReducer = createReducer(initialState)
 
-export function AppReducer(state: LaunchListState, action: Action): LaunchListState {
-    return reducer(state as LaunchListState, action as Action);
+export function AppReducer(state: typeof initialState, action: Action): typeof initialState {
+    return reducerLaunch(state as typeof initialState, action as Action);
   }

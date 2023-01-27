@@ -1,5 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import { Launch } from "../../../models/launch.model";
+import { Launch } from "src/app/models/launch.model";
 
 export const loadLaunchList = createAction('[Launch List Component] Load Launch List')
 

@@ -3,5 +3,5 @@ export interface LaunchListState {
 }
 
 export const initialState: LaunchListState = {
-    launchs: undefined
+    launchs: null
 }

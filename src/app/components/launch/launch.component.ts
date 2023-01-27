@@ -14,5 +14,5 @@ export class LaunchComponent {
 
   launchList!: Launch[]
 
-  constructor(private propertiesService: PropertiesService, private router: Router) { }
+  constructor(readonly propertiesService: PropertiesService, readonly router: Router) { }
 }

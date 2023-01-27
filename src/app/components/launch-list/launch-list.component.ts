@@ -1,8 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { Launch } from 'src/app/models/launch.model';
 import { PropertiesService } from 'src/app/services/properties.service';
 import { LaunchListState } from 'src/app/store/app.interface';
-import * as fromActions from '../../store/selectors/reducers/actions'
+import * as fromActions from '../../store/actions/actions-launchs'
 
 @Component({
   selector: 'app-launch-list',
@@ -10,15 +11,18 @@ import * as fromActions from '../../store/selectors/reducers/actions'
   styleUrls: ['./launch-list.component.scss']
 })
 export class LaunchListComponent implements OnInit {
-  myLaunchList!: any
 
+  myLaunchList!: Launch[]
+  // readonly myLaunchList$ = this.store.select('launchs').pipe(map((launchs) => launchs))
   constructor(private propertiesService: PropertiesService, private store: Store<LaunchListState>) {}
 
-  async ngOnInit() {
+  ngOnInit() {
     this.propertiesService.getAllLaunch().subscribe(res => {
       this.myLaunchList = res.results
-      console.log(this.myLaunchList)
-      this.store.dispatch(fromActions.loadLaunchListSuccess({ launchs: this.myLaunchList }))
+      // sort launch list to most recent
+      this.myLaunchList = this.myLaunchList.sort((a,b)=> Date.parse(b.window_start) - Date.parse(a.window_start));
+      console.log(res.results)
+      this.store.dispatch(fromActions.loadLaunchListSuccess({ launchs: res.results }))
     })
   }
 

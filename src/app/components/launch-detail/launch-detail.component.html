@@ -1,1 +1,9 @@
-<p>launch-detail works!</p>
+<div class="launch-card">
+    <h2>{{ name }}</h2>
+    <p>pad : {{ pad.name }}</p>
+    <p>rocket : {{ rocket.configuration.name}}</p>
+    <div *ngIf="program.length > 0">
+        <p *ngFor="let agency of program.agencies">{{ agency }}</p>
+    </div>
+    <p *ngIf="program.length == 0">No agencies associated</p>
+</div>
