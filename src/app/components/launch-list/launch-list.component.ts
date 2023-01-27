@@ -19,9 +19,8 @@ export class LaunchListComponent implements OnInit {
   ngOnInit() {
     this.propertiesService.getAllLaunch().subscribe(res => {
       this.myLaunchList = res.results
-      // sort launch list to most recent
+      // sort launch list to most recent window_start
       this.myLaunchList = this.myLaunchList.sort((a,b)=> Date.parse(b.window_start) - Date.parse(a.window_start));
-      console.log(res.results)
       this.store.dispatch(fromActions.loadLaunchListSuccess({ launchs: res.results }))
     })
   }
