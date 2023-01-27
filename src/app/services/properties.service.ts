@@ -15,6 +15,6 @@ export class PropertiesService {
   constructor(private http: HttpClient) { }
 
   getAllLaunch(): Observable<any>{
-    return this.http.get(API_URL + 'launch')
+    return this.http.get(API_URL + 'launch/upcoming?offest=0&limit=50')
   }
 }
