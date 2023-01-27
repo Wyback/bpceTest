@@ -14,7 +14,6 @@ import { launchSelector } from 'src/app/store/selectors/selector-launchs';
 export class LaunchDetailComponent implements OnInit {
 
   launchId!: string
-  // launch$ = this.store.select('launchs').pipe(filter((launch) => launch.id == this.launchId))
   private launch$ = this.store.pipe(select(launchSelector))
   private launchs!: any
   pad: any
@@ -31,19 +30,18 @@ export class LaunchDetailComponent implements OnInit {
         this.launch$.pipe()
             .subscribe((launchs) => {
               this.launchs = launchs
-              this.launchs = this.launchs.launchs.filter((launch: { id: string; }) => {
-                return launch.id == this.launchId
-              })
+              if(this.launchs.launchs == null){
+                this.router.navigateByUrl('error');
+              }else {
+                this.launchs = this.launchs.launchs.filter((launch: { id: string; }) => {
+                  return launch.id == this.launchId
+                })
+              }
             });
-        if(this.launchs.length < 1){
-          //redirect to error page because launch doesn't exist
-          this.router.navigate(['error'], { relativeTo: this.route });
-        }else{
-          this.pad = this.launchs[0].pad
-          this.rocket = this.launchs[0].rocket
-          this.program = this.launchs[0].program
-          this.name = this.launchs[0].name
-        }
+        this.pad = this.launchs[0].pad
+        this.rocket = this.launchs[0].rocket
+        this.program = this.launchs[0].program
+        this.name = this.launchs[0].name
       }
     )
   }
