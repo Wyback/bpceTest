@@ -14,7 +14,7 @@ export class LaunchListComponent implements OnInit {
 
   myLaunchList!: Launch[]
   // readonly myLaunchList$ = this.store.select('launchs').pipe(map((launchs) => launchs))
-  constructor(private propertiesService: PropertiesService, private store: Store<LaunchListState>) {}
+  constructor(readonly propertiesService: PropertiesService, readonly store: Store<LaunchListState>) {}
 
   ngOnInit() {
     this.propertiesService.getAllLaunch().subscribe(res => {

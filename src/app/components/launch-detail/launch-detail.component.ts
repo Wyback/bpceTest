@@ -22,7 +22,7 @@ export class LaunchDetailComponent implements OnInit {
   program!: Program
   name!: string
 
-  constructor(readonly route: ActivatedRoute, private store: Store<LaunchListState>, private router: Router) {
+  constructor(readonly route: ActivatedRoute, readonly store: Store<LaunchListState>, readonly router: Router) {
   }
 
   ngOnInit() {
