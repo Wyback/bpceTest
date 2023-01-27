@@ -2,8 +2,8 @@
     <h2>{{ name }}</h2>
     <p>pad : {{ pad.name }}</p>
     <p>rocket : {{ rocket.configuration.name}}</p>
-    <div *ngIf="program.length > 0">
+    <div *ngIf="program.agencies">
         <p *ngFor="let agency of program.agencies">{{ agency }}</p>
     </div>
-    <p *ngIf="program.length == 0">No agencies associated</p>
+    <p *ngIf="!program.agencies">No agencies associated</p>
 </div>

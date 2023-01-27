@@ -1,8 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Route, Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
-import { filter, take } from 'rxjs';
-import { Launch } from 'src/app/models/launch.model';
+import { Pad } from 'src/app/models/pad.model';
+import { Program } from 'src/app/models/program.model';
+import { Rocket } from 'src/app/models/rocket.model';
 import { LaunchListState } from 'src/app/store/app.interface';
 import { launchSelector } from 'src/app/store/selectors/selector-launchs';
 
@@ -16,9 +17,9 @@ export class LaunchDetailComponent implements OnInit {
   launchId!: string
   private launch$ = this.store.pipe(select(launchSelector))
   private launchs!: any
-  pad: any
-  rocket: any
-  program: any
+  pad!: Pad
+  rocket!: Rocket
+  program!: Program
   name!: string
 
   constructor(readonly route: ActivatedRoute, private store: Store<LaunchListState>, private router: Router) {
