@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { combineLatest, map, Subject, takeUntil } from 'rxjs';
@@ -13,7 +13,7 @@ import { launchSelector } from 'src/app/store/selectors/selector-launchs';
   templateUrl: './launch-detail.component.html',
   styleUrls: ['./launch-detail.component.scss']
 })
-export class LaunchDetailComponent implements OnInit {
+export class LaunchDetailComponent implements OnInit, OnDestroy {
 
   launchId!: string
   private launch$ = this.store.pipe(select(launchSelector))
@@ -23,7 +23,7 @@ export class LaunchDetailComponent implements OnInit {
   program!: Program
   name!: string
 
-  private destroy$ = new Subject()
+  private destroy$ = new Subject<boolean>()
 
   constructor(private readonly route: ActivatedRoute, private readonly store: Store<LaunchListState>, private readonly router: Router) {
   }
@@ -48,6 +48,11 @@ export class LaunchDetailComponent implements OnInit {
         this.rocket = this.launchs[0].rocket
         this.program = this.launchs[0].program
         this.name = this.launchs[0].name
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
   }
 
 }
