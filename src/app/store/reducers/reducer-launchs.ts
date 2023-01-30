@@ -17,6 +17,6 @@ export const metaReducers: MetaReducer[] = []
 
 export const rootReducer = createReducer(initialState)
 
-export function AppReducer(state: typeof initialState, action: Action): typeof initialState {
+export function AppReducer(state = initialState, action: Action): typeof initialState {
     return reducerLaunch(state as typeof initialState, action as Action);
   }
